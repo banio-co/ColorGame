@@ -1,17 +1,6 @@
 {
-    "compilerOptions": {
-      "outDir": "dist",
-      "module": "es6",
-      "jsx": "react",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "esModuleInterop": true,
-      "noImplicitAny": true
-    },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-      "node_modules",
-    ] 
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true
   }
+}

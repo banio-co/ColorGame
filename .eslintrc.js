@@ -21,6 +21,8 @@ module.exports = {
   ],
   plugins: [
     'import',
+    'react',
+    'react-native',
   ],
   rules: {
     // Override recommended rules + add additional ESLint rules
@@ -64,5 +66,6 @@ module.exports = {
     ],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [ 'warn', { args: 'none' }],
+    'require-jsdoc': 'off',
   },
 };
