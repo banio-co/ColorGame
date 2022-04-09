@@ -7,13 +7,11 @@ export type Point = Readonly<{
   y: number;
 }>;
 
-export type Polygon = Readonly<{
-  points: Point[];
-}>;
+export type Polygon = Readonly<Point[]>;
 
-export type Node = {
+export type Cell = {
   id: string;
-  color: string;
+  color: string | null;
   polygons: Polygon[];
-  neighbors: Dictionary<Node>;
+  neighbors: string[];
 };

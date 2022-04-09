@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { Delaunay } from 'd3-delaunay';
 import { View, Text, Button, StyleSheet } from 'react-native';
+
+import { generateNodes } from '../util/voronoi-service';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,19 +19,13 @@ const Sandbox: React.FC<SandboxProps> = ({
 }) => {
   const [ counter, setCounter ] = useState(0);
 
-  const voronoi = useMemo(() => {
-    const points = [ [ 0, 0 ], [ 0, 1 ], [ 1, 0 ], [ 1, 1 ] ];
-    const delaunay = Delaunay.from(points);
-    const result = delaunay.voronoi([ 0, 0, 960, 500 ]);
-
-    console.log('Calculated voronoi diagram');
-
-    return result;
+  const nodes = useMemo(() => {
+    return generateNodes([ [ 0, 0 ], [ 0, 1 ], [ 1, 0 ], [ 1, 1 ] ], [ 0, 0, 960, 500 ]);
   }, []);
 
   useEffect(() => {
-    console.log('Voronoi results', voronoi);
-  }, [ voronoi ]);
+    console.log('Voronoi results', nodes);
+  }, [ nodes ]);
 
   const handlePress = (): void => {
     setCounter(counter + 1);
