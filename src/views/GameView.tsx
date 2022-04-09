@@ -5,6 +5,7 @@ import { Headline, Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 
 import { CustomTheme } from '../util/LightTheme';
+import CanvasTest from './CanvasTest';
 
 const makeStyles = (theme: CustomTheme) => StyleSheet.create({
   surface: {
@@ -12,6 +13,9 @@ const makeStyles = (theme: CustomTheme) => StyleSheet.create({
     padding: theme.spacing * 3,
     borderRadius: theme.roundness,
     elevation: 2,
+  },
+  headline: {
+    textAlign: 'center',
   },
   gameContainer: {
     flexDirection: 'row',
@@ -28,10 +32,12 @@ const GameView: React.FC = () => {
 
   return (
     <Surface style={styles.surface}>
-      <Headline>Color Game</Headline>
+      <Headline style={styles.headline}>Color Game</Headline>
 
       <View style={styles.gameContainer}>
-        <View>board</View>
+        <View>
+          <CanvasTest />
+        </View>
         <View style={styles.infoContainer}>
           <View>colors</View>
           <View>score</View>
