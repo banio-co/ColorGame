@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { View, Text, Button, StyleSheet } from 'react-native';
+import seedrandom from 'seedrandom';
 
-import { generateNodes } from '../util/voronoi-service';
+import { generateCells, generatePoints } from '../util/voronoi-service';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,21 +12,26 @@ const styles = StyleSheet.create({
 });
 
 type SandboxProps = Readonly<{
-    foo: string;
+    seed: string;
 }>;
 
 const Sandbox: React.FC<SandboxProps> = ({
-  foo,
+  seed,
 }) => {
   const [ counter, setCounter ] = useState(0);
 
-  const nodes = useMemo(() => {
-    return generateNodes([ [ 0, 0 ], [ 0, 1 ], [ 1, 0 ], [ 1, 1 ] ], [ 0, 0, 960, 500 ]);
+  const rng = useMemo(() => seedrandom(seed), [ seed ]);
+
+  const cells = useMemo(() => {
+    const viewBounds: [number, number, number, number] = [ 0, 0, 960, 500 ];
+    const points = generatePoints(rng, 10, viewBounds);
+    console.log(points);
+    return generateCells(points, viewBounds);
   }, []);
 
   useEffect(() => {
-    console.log('Voronoi results', nodes);
-  }, [ nodes ]);
+    console.log('Voronoi results', cells);
+  }, [ cells ]);
 
   const handlePress = (): void => {
     setCounter(counter + 1);
@@ -35,7 +41,6 @@ const Sandbox: React.FC<SandboxProps> = ({
   return (
     <View style={styles.container}>
       <Text>Hello world!</Text>
-      <Text>Prop foo = {foo}</Text>
       <Button title="Increase Counter" onPress={handlePress}></Button>
       <Text>Counter = {counter}</Text>
     </View>

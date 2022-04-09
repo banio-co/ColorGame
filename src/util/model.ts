@@ -13,5 +13,5 @@ export type Cell = {
   id: string;
   color: string | null;
   polygons: Polygon[];
-  neighbors: string[];
+  neighbors: Set<string>;
 };
