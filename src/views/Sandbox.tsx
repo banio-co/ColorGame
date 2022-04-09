@@ -25,7 +25,6 @@ const Sandbox: React.FC<SandboxProps> = ({
   const cells = useMemo(() => {
     const viewBounds: [number, number, number, number] = [ 0, 0, 960, 500 ];
     const points = generatePoints(rng, 10, viewBounds);
-    console.log(points);
     return generateCells(points, viewBounds);
   }, []);
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import CanvasTest from './src/views/CanvasTest';
 import Sandbox from './src/views/Sandbox';
 
 const App: React.FC = () => {
@@ -11,6 +12,7 @@ const App: React.FC = () => {
       <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
       <Sandbox seed="The Berkinator" />
+      <CanvasTest />
     </View>
   );
 };
