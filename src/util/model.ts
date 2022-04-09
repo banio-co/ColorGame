@@ -14,6 +14,6 @@ export type Polygon = {
 export type Node = Readonly<{
   id: string;
   color: string;
-  position: Point;
+  polygons: Polygon[];
   neighbors: Dictionary<Node>;
 }>;
