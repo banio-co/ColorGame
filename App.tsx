@@ -1,29 +1,36 @@
 import React from 'react';
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 
-import CanvasTest from './src/views/CanvasTest';
-import Sandbox from './src/views/Sandbox';
-
-const App: React.FC = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Sandbox seed="The Berkinator" />
-      <CanvasTest />
-    </View>
-  );
-};
+import { LightTheme } from './src/util/LightTheme';
+import GameView from './src/views/GameView';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
 });
+
+const App: React.FC = () => {
+  return (
+    <PaperProvider theme={LightTheme}>
+      <ImageBackground
+        source={require('./assets/background.png')}
+        style={styles.image}>
+        <View style={styles.container}>
+          <GameView />
+        </View>
+      </ImageBackground>
+    </PaperProvider>
+  );
+};
 
 export default App;

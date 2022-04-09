@@ -67,5 +67,7 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [ 'warn', { args: 'none' }],
     'require-jsdoc': 'off',
+    'indent': 'off',
+    '@typescript-eslint/indent': [ 'error', 2 ],
   },
 };

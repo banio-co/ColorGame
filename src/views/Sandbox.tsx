@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 });
 
 type SandboxProps = Readonly<{
-    seed: string;
+  seed: string;
 }>;
 
 const Sandbox: React.FC<SandboxProps> = ({
