@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { Delaunay } from 'd3-delaunay';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import seedrandom from 'seedrandom';
+
+import { generateCells, generatePoints } from '../util/voronoi-service';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,27 +12,25 @@ const styles = StyleSheet.create({
 });
 
 type SandboxProps = Readonly<{
-    foo: string;
+    seed: string;
 }>;
 
 const Sandbox: React.FC<SandboxProps> = ({
-  foo,
+  seed,
 }) => {
   const [ counter, setCounter ] = useState(0);
 
-  const voronoi = useMemo(() => {
-    const points = [ [ 0, 0 ], [ 0, 1 ], [ 1, 0 ], [ 1, 1 ] ];
-    const delaunay = Delaunay.from(points);
-    const result = delaunay.voronoi([ 0, 0, 960, 500 ]);
+  const rng = useMemo(() => seedrandom(seed), [ seed ]);
 
-    console.log('Calculated voronoi diagram');
-
-    return result;
+  const cells = useMemo(() => {
+    const viewBounds: [number, number, number, number] = [ 0, 0, 960, 500 ];
+    const points = generatePoints(rng, 10, viewBounds);
+    return generateCells(points, viewBounds);
   }, []);
 
   useEffect(() => {
-    console.log('Voronoi results', voronoi);
-  }, [ voronoi ]);
+    console.log('Voronoi results', cells);
+  }, [ cells ]);
 
   const handlePress = (): void => {
     setCounter(counter + 1);
@@ -40,7 +40,6 @@ const Sandbox: React.FC<SandboxProps> = ({
   return (
     <View style={styles.container}>
       <Text>Hello world!</Text>
-      <Text>Prop foo = {foo}</Text>
       <Button title="Increase Counter" onPress={handlePress}></Button>
       <Text>Counter = {counter}</Text>
     </View>
