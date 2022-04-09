@@ -62,7 +62,7 @@ export const generateCells = (points: D3Point[], viewBounds: ViewBounds): Dictio
   // Create a cell from each polygon
   const cells: Cell[] = polygons.map((polygon, index) => parseCell(voronoi, polygon, index));
 
-  // Parse nodes into dictionary of nodes by id
+  // Parse cells into dictionary of cells by id
   const cellsById = reduce<Cell, Dictionary<Cell>>(cells, (result, cell) => {
     result[cell.id] = cell;
     return result;
