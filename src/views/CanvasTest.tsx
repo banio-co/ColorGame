@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 
 import { Platform, View, Button } from 'react-native';
 import Canvas, { CanvasRenderingContext2D as NativeContext2D } from 'react-native-canvas';
@@ -13,14 +13,14 @@ const CanvasTest: React.FC = () => {
     setCtx(canvasRef.current?.getContext('2d'));
   }, [ canvasRef ]);
 
+  const canvas = useMemo<React.ReactNode>(() => (
+    Platform.OS == 'web' ?
+      <canvas ref={canvasRef as React.RefObject<HTMLCanvasElement>}/> :
+      <Canvas ref={canvasRef as React.RefObject<Canvas>}/>
+  ), [ canvasRef ]);
+
   const handlePress = (nextColor: 'red' | 'blue' | 'green'): void => {
     setColor(nextColor);
-  };
-
-  const renderCanvas = (): React.ReactNode => {
-    return Platform.OS == 'web' ?
-      <canvas ref={canvasRef as React.RefObject<HTMLCanvasElement>}/> :
-      <Canvas ref={canvasRef as React.RefObject<Canvas>}/>;
   };
 
   if (ctx) {
@@ -33,7 +33,7 @@ const CanvasTest: React.FC = () => {
       <Button title="Red" onPress={() => handlePress('red')}></Button>
       <Button title="Blue" onPress={() => handlePress('blue')}></Button>
       <Button title="Green" onPress={() => handlePress('green')}></Button>
-      {renderCanvas()}
+      {canvas}
     </View>
   );
 };
