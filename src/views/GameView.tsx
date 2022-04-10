@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Headline, Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 
-import { useScore } from '../shared/ScoreContext';
+import { useScore } from '../shared/ScoreProvider';
 import { CustomTheme } from '../util/LightTheme';
 import CanvasTest from './CanvasTest';
 
