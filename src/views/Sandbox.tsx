@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import seedrandom from 'seedrandom';
 
+import { ScoreAction, useScore } from '../shared/ScoreContext';
 import { generateCells, generatePoints } from '../util/voronoi-service';
 
 const styles = StyleSheet.create({
@@ -18,7 +19,7 @@ type SandboxProps = Readonly<{
 const Sandbox: React.FC<SandboxProps> = ({
   seed,
 }) => {
-  const [ counter, setCounter ] = useState(0);
+  const { score, updateScore } = useScore();
 
   const rng = useMemo(() => seedrandom(seed), [ seed ]);
 
@@ -33,15 +34,14 @@ const Sandbox: React.FC<SandboxProps> = ({
   }, [ cells ]);
 
   const handlePress = (): void => {
-    setCounter(counter + 1);
+    updateScore(ScoreAction.INCREMENT);
   };
 
   console.log('Rendered frame');
   return (
     <View style={styles.container}>
-      <Text>Hello world!</Text>
-      <Button title="Increase Counter" onPress={handlePress}></Button>
-      <Text>Counter = {counter}</Text>
+      <Button title="Increment score" onPress={handlePress}></Button>
+      <Text>Score = {score}</Text>
     </View>
   );
 };
