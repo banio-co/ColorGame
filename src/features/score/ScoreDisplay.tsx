@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { useTheme, Title, Subheading } from 'react-native-paper';
 
 import { CustomTheme } from '../../util/LightTheme';
 
 const makeStyles = (theme: CustomTheme) => StyleSheet.create({
   container: {
     flexDirection: 'column',
+    alignItems: 'center',
   },
 });
 
@@ -24,9 +25,10 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
   const styles = makeStyles(theme);
 
   return (
+    // TODO: Wrap with shared styled "Card" component
     <View style={styles.container}>
-      <Text>{label}</Text>
-      <Text>{score}</Text>
+      <Title>{label}</Title>
+      <Subheading>{score}</Subheading>
     </View>
   );
 };
