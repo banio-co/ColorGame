@@ -15,11 +15,11 @@ export const ScoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [ score, setScore ] = useState(0);
 
   const increment = () => {
-    setScore(score + 1);
+    setScore((currScore) => currScore + 1);
   };
 
   const decrement = () => {
-    setScore(score - 1);
+    setScore((currScore) => currScore - 1);
   };
 
   const updateScore = (action: ScoreAction) => {
