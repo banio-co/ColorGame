@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Headline, Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 
+import HighScore from '../features/score/HighScore';
+import Score from '../features/score/Score';
 import { CustomTheme } from '../util/LightTheme';
 import CanvasTest from './CanvasTest';
 
@@ -33,15 +35,14 @@ const GameView: React.FC = () => {
   return (
     <Surface style={styles.surface}>
       <Headline style={styles.headline}>Color Game</Headline>
-
       <View style={styles.gameContainer}>
         <View>
           <CanvasTest />
         </View>
         <View style={styles.infoContainer}>
-          <View>colors</View>
-          <View>score</View>
-          <View>high score</View>
+          <View><Text>colors</Text></View>
+          <Score />
+          <HighScore />
         </View>
       </View>
     </Surface>
