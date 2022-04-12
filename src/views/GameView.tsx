@@ -5,6 +5,8 @@ import { Headline, Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 
 import NextColors from '../features/NextColors';
+import HighScore from '../features/score/HighScore';
+import Score from '../features/score/Score';
 import { CustomTheme } from '../util/LightTheme';
 import CanvasTest from './CanvasTest';
 
@@ -34,15 +36,14 @@ const GameView: React.FC = () => {
   return (
     <Surface style={styles.surface}>
       <Headline style={styles.headline}>Color Game</Headline>
-
       <View style={styles.gameContainer}>
         <View>
           <CanvasTest />
         </View>
         <View style={styles.infoContainer}>
-          <View><NextColors /></View>
-          <View>score</View>
-          <View>high score</View>
+          <NextColors />
+          <Score />
+          <HighScore />
         </View>
       </View>
     </Surface>
