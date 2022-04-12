@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, ListRenderItem } from 'react-native';
 import { Card, useTheme } from 'react-native-paper';
 
+import { useColor } from '../shared/ColorProvider';
 import { CustomTheme } from '../util/LightTheme';
 
 const makeStyles = (theme: CustomTheme) => StyleSheet.create({
@@ -17,9 +18,10 @@ const makeStyles = (theme: CustomTheme) => StyleSheet.create({
 });
 
 const NextColors: React.FC = () => {
-  const nextColors: string[] = [ '#F03834', '#2274A5', '#00916E' ];
+  const { getNextColor, getAllColors } = useColor();
   const theme = useTheme() as CustomTheme;
   const styles = makeStyles(theme);
+  const nextColors: string[] = getAllColors();
 
   const colorBlock: ListRenderItem<string> = ({ item }) => (
     <View

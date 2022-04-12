@@ -3,6 +3,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 
+import { ColorProvider } from './src/shared/ColorProvider';
 import { RNGProvider } from './src/shared/RNGProvider';
 import { ScoreProvider } from './src/shared/ScoreProvider';
 import { LightTheme } from './src/util/LightTheme';
@@ -26,16 +27,18 @@ const App: React.FC = () => {
   return (
     <PaperProvider theme={LightTheme}>
       <RNGProvider seed="beer">
-        <ScoreProvider>
-          <ImageBackground
-            source={require('./assets/background.png')}
-            style={styles.image}>
-            <View style={styles.container}>
-              <GameView />
-              <Sandbox />
-            </View>
-          </ImageBackground>
-        </ScoreProvider>
+        <ColorProvider>
+          <ScoreProvider>
+            <ImageBackground
+              source={require('./assets/background.png')}
+              style={styles.image}>
+              <View style={styles.container}>
+                <GameView />
+                <Sandbox />
+              </View>
+            </ImageBackground>
+          </ScoreProvider>
+        </ColorProvider>
       </RNGProvider>
     </PaperProvider>
   );
