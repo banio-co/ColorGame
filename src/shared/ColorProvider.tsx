@@ -9,8 +9,8 @@ import { useRNG } from './RNGProvider';
 
 export type ColorStore = Readonly<{
   peekNextColor(): string;
+  peekAllColors(): string[];
   getNextColor(): string;
-  getAllColors(): string[];
 }>;
 
 const ColorContext = React.createContext<ColorStore>(null);
@@ -25,10 +25,6 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setColors(generateColors(rng));
   }, [ rng ]);
 
-  useEffect(() => {
-    console.log(`colors: ${colors}`);
-  }, [ colors ]);
-
   const generateColors = (rng: PRNG): string[] => {
     const colors = [];
     for (let i = 0; i < 4; i++) { // have 4th color ready in case of animation to slide in
@@ -38,27 +34,23 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return colors;
   };
 
-  const getNewColor = (rng: PRNG): string => {
-    const randIndex = Math.floor(getNumberInRange(rng, 1, 4));
+  const generateNewColor = (rng: PRNG): string => {
+    const randIndex = Math.floor(getNumberInRange(rng, 0, 4));
     return themeColors[randIndex];
   };
 
-  const peekNextColor = (): string => {
-    return colors[0];
-  };
+  const peekNextColor = (): string => colors[0];
+
+  const peekAllColors = (): string[] => colors;
 
   const getNextColor = (): string => {
     const nextColor = colors[0];
-    setColors((colors) => [ ...(colors.slice(1)), getNewColor(rng) ]);
+    setColors((colors) => [ ...(colors.slice(1)), generateNewColor(rng) ]);
     return nextColor;
   };
 
-  const getAllColors = (): string[] => {
-    return colors;
-  };
-
   return (
-    <ColorContext.Provider value={{ peekNextColor, getNextColor, getAllColors }}>
+    <ColorContext.Provider value={{ peekNextColor, getNextColor, peekAllColors }}>
       {children}
     </ColorContext.Provider>
   );
