@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Headline, Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 
+import NextColors from '../features/NextColors';
 import HighScore from '../features/score/HighScore';
 import Score from '../features/score/Score';
 import { CustomTheme } from '../util/LightTheme';
@@ -40,7 +41,7 @@ const GameView: React.FC = () => {
           <CanvasTest />
         </View>
         <View style={styles.infoContainer}>
-          <View><Text>colors</Text></View>
+          <NextColors />
           <Score />
           <HighScore />
         </View>
